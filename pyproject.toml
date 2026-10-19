@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+version = "0.1"
+name = "algo_genetique"
+requires-python = ">=3.9"
+maintainers = [
+  { name = "Mathis Mercier", email = "mathis.mercier@etu.univ-savoie.fr" },
+]
+description = "TP1 M2 MMAA INFO901 : Algorithme Génétique"
+readme = "README.md"
+license = "MIT"
+
+[project.urls]
+Repository = "https://github.com/rdwk2/algo_genetique_-fuzzy-octo-waddle-"
+
+[project.scripts]
+algo_genetique = "algo_genetique.__main__:main"
