@@ -6,7 +6,7 @@ from algo_genetique.fenetre import Fenetre
 
 class Coordonnee:
     def __init__(self, coordonne: float, fenetre : Fenetre) -> None:
-        self.coodonne = coordonne
+        self.coordonne = coordonne
         self.fenetre = fenetre
 
     @classmethod

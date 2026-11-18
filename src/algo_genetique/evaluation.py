@@ -9,11 +9,19 @@ class Evaluation(ABC):
         self.borne_max = borne_max
 
     @abstractmethod
-    def f(self,ind : Individue) -> float:
-        ...
+    def f(self, ind: Individue) -> float: ...
 
-    def evaluer(self,ind : Individue) -> float:
+    def evaluer(self, ind: Individue) -> float:
         return self.f(ind)
 
-    def __call__(self,ind : Individue) -> float:
+    def __call__(self, ind: Individue) -> float:
         return self.evaluer(ind)
+
+
+# class carre(Evaluation):
+
+#     def f(self,ind : Individue) -> float:
+#         s = 0
+#         for c in ind.coordonnees:
+#             s += c.coordonne**2
+#         return s

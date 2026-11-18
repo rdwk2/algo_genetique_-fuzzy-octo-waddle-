@@ -6,12 +6,17 @@ from algo_genetique.fenetre import Fenetre
 from algo_genetique.individue import Individue
 from algo_genetique.population import Population
 from algo_genetique.selection import Selection
+from src.algo_genetique.evaluation import Evaluation
+
+
+class EvenSize(Exception):
+    pass
 
 
 class AlgoGenetique:
     def __init__(
         self,
-        eval,
+        eval : Evaluation,
         crossover: Crossover,
         selection: Selection,
         codage: Codage,
@@ -23,9 +28,9 @@ class AlgoGenetique:
         self.codage = codage
         self.fenetres = fenetres
 
-    def minimize(self, taille: int, max_iter: int = 100) -> Individue:
+    def minimize(self, taille: int, max_iter: int = 100) -> tuple[Individue, float]:
         if taille % 2 != 0:
-            raise Exception("la taille doit être un mutiple de 2")
+            raise EvenSize("la taille doit être un mutiple de 2")
 
         pop = Population.uniforme(taille, self.fenetres)
 
@@ -38,9 +43,10 @@ class AlgoGenetique:
                 new_ind1, new_ind2 = self.selection.select(
                     (ind1, ind2), (child1, child2)
                 )
+                best = min([best,ind1,ind2,child1,child2],key=self.eval.f)
+
                 individues.append(new_ind1)
                 individues.append(new_ind2)
             pop = Population(taille, self.fenetres, individues)
-            best = pop.best(self.eval)
 
-        return best
+        return best,self.eval(best)
